@@ -1,24 +1,54 @@
 {
   "name": "CheemsBot-MD",
-  "description": "whatsapp md bot build with nodejs",
+  "description": "WhatsApp MD bot built with Node.js",
   "repository": "https://github.com/DGXeon/CheemsBot-MD4",
   "logo": "https://pbs.twimg.com/media/FO7fojOakAAyYgt?format=jpg&name=900x900",
-  "keywords": ["nodejs", "bot", "whatsapp bot", "whatsapp automation", "multi device"],
+  "keywords": [
+    "nodejs",
+    "whatsapp bot",
+    "whatsapp automation",
+    "multi-device",
+    "cheemsbot"
+  ],
   "buildpacks": [
     {
-      "url": "heroku/nodejs"
+      "url": "heroku/nodejs"  // Default Node.js buildpack for Heroku deployment
     },
     {
-      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"  // FFmpeg buildpack for media processing
     },
     {
-      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"  // WebP image support
     }
   ],
-   "formation": {
-        "worker": {
-            "quantity": 1,
-            "size": "free"
-        }
+  "formation": {
+    "worker": {
+      "quantity": 1,  // Set to 1 worker for scaling purposes
+      "size": "free"  // You can upgrade to a larger size for better performance
     }
+  },
+  "env": {
+    "SESSION_ID": {
+      "description": "Your WhatsApp bot's session ID",
+      "required": true
+    },
+    "OWNER_NUMBER": {
+      "description": "Phone number of the bot owner (in international format)",
+      "required": true
+    },
+    "BOT_NAME": {
+      "description": "The name of your bot",
+      "required": true
+    },
+    "PREFIX": {
+      "description": "Prefix for bot commands",
+      "value": "!",  // Default prefix for commands
+      "required": true
+    },
+    "WORK_TYPE": {
+      "description": "Set whether your bot is for public or private use",
+      "value": "public",  // Can be 'public' or 'private'
+      "required": true
+    }
+  }
 }
